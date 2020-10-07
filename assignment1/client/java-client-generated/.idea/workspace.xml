@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="845fab82-926c-4d6e-835b-e655075deb88" name="Default Changelist" comment="" />
+    <list default="true" id="845fab82-926c-4d6e-835b-e655075deb88" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../server/.idea/server.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../server/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/swagger/client/PartOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/swagger/client/PartOne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/swagger/client/api/SkiersApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/swagger/client/api/SkiersApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/SkiersApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/SkiersApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swagger-java-client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/swagger-java-client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +28,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
   <component name="ProjectId" id="1iDVtY5oJPmFpWPxnC60ZjwkcRA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,6 +40,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -87,6 +106,8 @@
       <workItem from="1602012032326" duration="640000" />
       <workItem from="1602012815001" duration="5668000" />
       <workItem from="1602034013819" duration="9635000" />
+      <workItem from="1602045307045" duration="3124000" />
+      <workItem from="1602053258759" duration="739000" />
     </task>
     <servers />
   </component>
@@ -102,30 +123,39 @@
       <screen x="1440" y="23" width="1920" height="1057" />
     </state>
     <state x="2079" y="276" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.23.1440.823/1440.23.1920.1057@1440.23.1920.1057" timestamp="1602033922959" />
-    <state width="1363" height="149" key="GridCell.Tab.0.bottom" timestamp="1602043316485">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state width="1287" height="122" key="GridCell.Tab.0.bottom" timestamp="1602053768206">
+      <screen x="0" y="23" width="1440" height="825" />
     </state>
     <state width="1363" height="149" key="GridCell.Tab.0.bottom/0.23.1440.823/1440.23.1920.1057@1440.23.1920.1057" timestamp="1602043316485" />
-    <state width="1363" height="149" key="GridCell.Tab.0.center" timestamp="1602043316484">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state width="1287" height="122" key="GridCell.Tab.0.bottom/0.23.1440.823@0.23.1440.823" timestamp="1602053230767" />
+    <state width="1287" height="122" key="GridCell.Tab.0.bottom/0.23.1440.825@0.23.1440.825" timestamp="1602053768206" />
+    <state width="1287" height="122" key="GridCell.Tab.0.center" timestamp="1602053768205">
+      <screen x="0" y="23" width="1440" height="825" />
     </state>
     <state width="1363" height="149" key="GridCell.Tab.0.center/0.23.1440.823/1440.23.1920.1057@1440.23.1920.1057" timestamp="1602043316484" />
-    <state width="1363" height="149" key="GridCell.Tab.0.left" timestamp="1602043316483">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state width="1287" height="122" key="GridCell.Tab.0.center/0.23.1440.823@0.23.1440.823" timestamp="1602053230766" />
+    <state width="1287" height="122" key="GridCell.Tab.0.center/0.23.1440.825@0.23.1440.825" timestamp="1602053768205" />
+    <state width="1287" height="122" key="GridCell.Tab.0.left" timestamp="1602053768203">
+      <screen x="0" y="23" width="1440" height="825" />
     </state>
     <state width="1363" height="149" key="GridCell.Tab.0.left/0.23.1440.823/1440.23.1920.1057@1440.23.1920.1057" timestamp="1602043316483" />
-    <state width="1363" height="149" key="GridCell.Tab.0.right" timestamp="1602043316484">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state width="1287" height="122" key="GridCell.Tab.0.left/0.23.1440.823@0.23.1440.823" timestamp="1602053230766" />
+    <state width="1287" height="122" key="GridCell.Tab.0.left/0.23.1440.825@0.23.1440.825" timestamp="1602053768203" />
+    <state width="1287" height="122" key="GridCell.Tab.0.right" timestamp="1602053768205">
+      <screen x="0" y="23" width="1440" height="825" />
     </state>
     <state width="1363" height="149" key="GridCell.Tab.0.right/0.23.1440.823/1440.23.1920.1057@1440.23.1920.1057" timestamp="1602043316484" />
-    <state x="2068" y="366" key="com.intellij.ide.util.TipDialog" timestamp="1602034028700">
+    <state width="1287" height="122" key="GridCell.Tab.0.right/0.23.1440.823@0.23.1440.823" timestamp="1602053230767" />
+    <state width="1287" height="122" key="GridCell.Tab.0.right/0.23.1440.825@0.23.1440.825" timestamp="1602053768205" />
+    <state x="2068" y="366" key="com.intellij.ide.util.TipDialog" timestamp="1602045307506">
       <screen x="1440" y="23" width="1920" height="1057" />
     </state>
-    <state x="2068" y="366" key="com.intellij.ide.util.TipDialog/0.23.1440.823/1440.23.1920.1057@1440.23.1920.1057" timestamp="1602034028700" />
-    <state x="2120" y="236" width="683" height="729" key="find.popup" timestamp="1602012930294">
-      <screen x="1440" y="23" width="1920" height="1057" />
+    <state x="2068" y="366" key="com.intellij.ide.util.TipDialog/0.23.1440.823/1440.23.1920.1057@1440.23.1920.1057" timestamp="1602045307506" />
+    <state x="510" y="189" width="683" height="569" key="find.popup" timestamp="1602053887519">
+      <screen x="0" y="23" width="1440" height="825" />
     </state>
     <state x="2120" y="236" width="683" height="729" key="find.popup/0.23.1440.823/1440.23.1920.1057@1440.23.1920.1057" timestamp="1602012930294" />
+    <state x="510" y="189" width="683" height="569" key="find.popup/0.23.1440.825@0.23.1440.825" timestamp="1602053887519" />
     <state x="116" y="157" key="new project wizard" timestamp="1601510541173">
       <screen x="0" y="23" width="1440" height="834" />
     </state>

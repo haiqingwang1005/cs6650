@@ -13,6 +13,7 @@
 package io.swagger.client.api;
 
 import io.swagger.client.ApiException;
+import io.swagger.client.ApiResponse;
 import io.swagger.client.model.LiftRide;
 import io.swagger.client.model.ResponseMsg;
 import io.swagger.client.model.SkierVertical;
@@ -45,7 +46,7 @@ public class SkiersApiTest {
         String resortID = null;
         String dayID = null;
         String skierID = null;
-        SkierVertical response = api.getSkierDayVertical(resortID, dayID, skierID);
+        ApiResponse<SkierVertical> response = api.getSkierDayVertical(resortID, dayID, skierID);
 
         // TODO: test validations
     }

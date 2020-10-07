@@ -142,9 +142,9 @@ public class SkiersApi {
      * @return SkierVertical
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public SkierVertical getSkierDayVertical(String resortID, String dayID, String skierID) throws ApiException {
+    public ApiResponse<SkierVertical> getSkierDayVertical(String resortID, String dayID, String skierID) throws ApiException {
         ApiResponse<SkierVertical> resp = getSkierDayVerticalWithHttpInfo(resortID, dayID, skierID);
-        return resp.getData();
+        return resp;
     }
 
     /**
@@ -404,8 +404,8 @@ public class SkiersApi {
      * @param body information for new lift ride event (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public void writeNewLiftRide(LiftRide body) throws ApiException {
-        writeNewLiftRideWithHttpInfo(body);
+    public ApiResponse<Void> writeNewLiftRide(LiftRide body) throws ApiException {
+        return writeNewLiftRideWithHttpInfo(body);
     }
 
     /**
