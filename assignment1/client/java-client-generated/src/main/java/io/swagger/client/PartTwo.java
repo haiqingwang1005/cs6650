@@ -2,21 +2,22 @@ package io.swagger.client;
 
 import io.swagger.client.api.SkiersApi;
 import io.swagger.client.model.LiftRide;
+import io.swagger.client.model.SkierVertical;
+import io.swagger.client.util.CSVWriter;
 import io.swagger.client.util.ParameterPropertiesValues;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class PartOne {
-
-  private static Logger logger = LogManager.getLogger(PartOne.class);
-  private static AtomicInteger successfulCount = new AtomicInteger(0);
-  private static AtomicInteger failedCount = new AtomicInteger(0);
-  private static AtomicInteger totalCount = new AtomicInteger(0);
+public class PartTwo {
+  private static Logger logger = LogManager.getLogger(PartTwo.class);
   private static CountDownLatch totalLatch;
+  private static List<List<String>> allData = new ArrayList<>();
 
   public static void main(String[] arguments) throws IOException, InterruptedException {
     ParameterPropertiesValues.initValues();
@@ -82,14 +83,12 @@ public class PartOne {
     }
     countDownLatch3.await();
 
+
     totalLatch.await();
 
-    long endTime = System.currentTimeMillis();
 
-    System.out.println(String.format("number of successful requests sent: %d", successfulCount.get()));
-    System.out.println(String.format("number of unsuccessful requests: %d", failedCount.get()));
-    System.out.println(String.format("total wait time: %d", endTime - startTime));
-    System.out.println(String.format("throughput: %f", 1000.0 * totalCount.get()/(endTime - startTime)));
+    long endTime = System.currentTimeMillis();
+    CSVWriter.writeToCSV(allData);
 
   }
 
@@ -133,25 +132,35 @@ public class PartOne {
           liftRide.setResortID(resortID);
           liftRide.setSkierID(String.valueOf(skierID));
           liftRide.setTime(String.valueOf(time));
-          skiersApiInstance.writeNewLiftRide(liftRide);
-          successfulCount.incrementAndGet();
+          long sendTime = System.currentTimeMillis();
+          ApiResponse<Void> apiResponse = skiersApiInstance.writeNewLiftRide(liftRide);
+          int code = apiResponse.getStatusCode();
+          long receiveTime = System.currentTimeMillis();
+          long latency = receiveTime - sendTime;
+          System.out.println(String.format("start time: %d, latency: %d, code: %d, method: POST",
+              sendTime, latency, code));
+          List<String> data = Arrays.asList(String.valueOf(sendTime), "POST",
+              String.valueOf(latency), String.valueOf(code));
+          allData.add(data);
         } catch (ApiException e) {
           logger.error("Fail to post in Phase 1", e);
-          failedCount.incrementAndGet();
         }
-        totalCount.incrementAndGet();
       }
 
       for (int i = 0; i < numOfGet; i++) {
         int skierID = rand.nextInt(endSkierID + 1 - startSkierID) + startSkierID;
         try {
-          skiersApiInstance.getSkierDayVertical(resortID, dayID, String.valueOf(skierID));
-          successfulCount.incrementAndGet();
+          long sendTime = System.currentTimeMillis();
+          ApiResponse<SkierVertical> apiResponse = skiersApiInstance.getSkierDayVertical(resortID, dayID, String.valueOf(skierID));
+          int code = apiResponse.getStatusCode();
+          long receiveTime = System.currentTimeMillis();
+          long latency = receiveTime - sendTime;
+          List<String> data = Arrays.asList(String.valueOf(sendTime), "GET",
+              String.valueOf(latency), String.valueOf(code));
+          allData.add(data);
         } catch (ApiException e) {
           logger.error("Fail to get in Phase 1", e);
-          failedCount.incrementAndGet();
         }
-        totalCount.incrementAndGet();
       }
       latch.countDown();
       totalLatch.countDown();
