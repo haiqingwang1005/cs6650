@@ -88,8 +88,9 @@ public class PartOne {
 
     System.out.println(String.format("number of successful requests sent: %d", successfulCount.get()));
     System.out.println(String.format("number of unsuccessful requests: %d", failedCount.get()));
-    System.out.println(String.format("total wait time: %d", endTime - startTime));
-    System.out.println(String.format("throughput: %f", 1000.0 * totalCount.get()/(endTime - startTime)));
+    System.out.println(String.format("total wait time: %d ms", endTime - startTime));
+    System.out.println(String.format("throughput: %f request/second",
+        1000.0 * totalCount.get()/(endTime - startTime)));
 
   }
 

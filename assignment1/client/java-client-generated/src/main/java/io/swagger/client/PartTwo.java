@@ -3,11 +3,13 @@ package io.swagger.client;
 import io.swagger.client.api.SkiersApi;
 import io.swagger.client.model.LiftRide;
 import io.swagger.client.model.SkierVertical;
+import io.swagger.client.util.CSVParser;
 import io.swagger.client.util.CSVWriter;
 import io.swagger.client.util.ParameterPropertiesValues;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
@@ -17,10 +19,15 @@ import org.apache.logging.log4j.Logger;
 public class PartTwo {
   private static Logger logger = LogManager.getLogger(PartTwo.class);
   private static CountDownLatch totalLatch;
-  private static List<List<String>> allData = new ArrayList<>();
+  public static long startTime;
+  public static long endTime;
+  private static List<List<String>> lines;
 
   public static void main(String[] arguments) throws IOException, InterruptedException {
     ParameterPropertiesValues.initValues();
+
+    lines = Collections.synchronizedList(new ArrayList<List<String>>());
+    CSVWriter.writeTitleToCSV();
 
     int maxThreads = ParameterPropertiesValues.getMaxThreads();
     int phaseOneThreads = maxThreads / 4;
@@ -29,10 +36,9 @@ public class PartTwo {
 
     totalLatch = new CountDownLatch(phaseOneThreads + phaseTwoThreads + phaseThreeThreads + 3);
 
+    // phase1
 
-    // p1
-    long startTime = System.currentTimeMillis();
-
+    startTime = System.currentTimeMillis();
     int numSkiers = ParameterPropertiesValues.getNumSkiers();
     int phaseOneGroupNumber = numSkiers / phaseOneThreads;
     CountDownLatch countDownLatch1 = new CountDownLatch((phaseOneThreads + 10)/10);
@@ -83,13 +89,35 @@ public class PartTwo {
     }
     countDownLatch3.await();
 
-
     totalLatch.await();
+    endTime = System.currentTimeMillis();
+    CSVWriter.writeLinesToCSV(lines);
+    printResults();
+  }
 
-
-    long endTime = System.currentTimeMillis();
-    CSVWriter.writeToCSV(allData);
-
+  private static void printResults() throws IOException {
+    CSVParser csvParser = new CSVParser();
+    System.out.println(String.format("mean response time for POST: %f ms",
+        csvParser.getMeanResponseTimeForPost()));
+    System.out.println(String.format("mean response time for GET: %f ms",
+        csvParser.getMeanResponseTimeForGet()));
+    System.out.println(String.format("median response time for POST: %f ms",
+        csvParser.getMedianResponseTimeForPost()));
+    System.out.println(String.format("median response time for GET: %f ms",
+        csvParser.getMedianResponseTimeForGet()));
+    System.out.println(String.format("total wall time: %d ms",
+        csvParser.getTotalWallTime()));
+    System.out.println(String.format("total request amount: %d", csvParser.getRequestCount()));
+    System.out.println(String.format("throughput: %f request/second",
+        csvParser.getThroughput()));
+    System.out.println(String.format("p99 response time for POST: %d ms",
+        csvParser.get99ResponseTimePost()));
+    System.out.println(String.format("p99 response time for GET: %d ms",
+        csvParser.get99ResponseTimeGet()));
+    System.out.println(String.format("max response time for POST: %d ms",
+        csvParser.maxPostResponseTime()));
+    System.out.println(String.format("max response time for GET: %d ms",
+        csvParser.maxGetResponseTime()));
   }
 
   static class SkierThread extends Thread {
@@ -137,13 +165,18 @@ public class PartTwo {
           int code = apiResponse.getStatusCode();
           long receiveTime = System.currentTimeMillis();
           long latency = receiveTime - sendTime;
-          System.out.println(String.format("start time: %d, latency: %d, code: %d, method: POST",
-              sendTime, latency, code));
+          // System.out.println(String.format("start time: %d, latency: %d, code: %d, method: POST",
+           //   sendTime, latency, code));
           List<String> data = Arrays.asList(String.valueOf(sendTime), "POST",
               String.valueOf(latency), String.valueOf(code));
-          allData.add(data);
+          //CSVWriter.writeLineToCSV(data);
+          //System.out.println(data);
+
+          lines.add(data);
         } catch (ApiException e) {
-          logger.error("Fail to post in Phase 1", e);
+          logger.error("Fail to post in Phase", e);
+        //} catch (IOException e) {
+        //  logger.error("Fail to write to csv in Phase", e);
         }
       }
 
@@ -157,9 +190,13 @@ public class PartTwo {
           long latency = receiveTime - sendTime;
           List<String> data = Arrays.asList(String.valueOf(sendTime), "GET",
               String.valueOf(latency), String.valueOf(code));
-          allData.add(data);
+
+          //CSVWriter.writeLineToCSV(data);
+          lines.add(data);
         } catch (ApiException e) {
-          logger.error("Fail to get in Phase 1", e);
+          logger.error("Fail to get in Phase", e);
+        //} catch (IOException e) {
+        //  logger.error("Fail to write to csv in Phase", e);
         }
       }
       latch.countDown();
