@@ -2,7 +2,7 @@ package com.haiqing.servlets;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.haiqing.db.MySQLConnection;
+import com.haiqing.db.DBCPDataSource;
 import com.haiqing.model.Liftride;
 import com.haiqing.model.Message;
 import com.haiqing.model.ResortVertical;
@@ -14,15 +14,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @WebServlet(name = "SkiersServlet")
 public class SkierServlet extends HttpServlet {
-
+  private static final Logger logger = LogManager.getLogger(SkierServlet.class);
   private Gson gson = new Gson();
 
   protected void doPost(HttpServletRequest request,
       HttpServletResponse response)
       throws ServletException, IOException {
+    logger.info("Do post for " + request.getPathInfo());
+
     response.setContentType("application/json");
     String urlPath = request.getPathInfo();
     PrintWriter out = response.getWriter();
@@ -32,14 +36,18 @@ public class SkierServlet extends HttpServlet {
     }
     String[] urlParts = urlPath.split("/");
     if (!isUrlValid(urlParts, request)) {
+
       response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       response.getWriter().write(gson.toJson(new Message("string")));
     } else {
-      MySQLConnection connection = new MySQLConnection();
+      logger.info("Open connection");
+
+      DBCPDataSource dataSource = new DBCPDataSource();
+      logger.info("Connection is open");
       JsonObject input = RPCHelper.readJSONObject(request);
+      logger.info("input " + input.toString());
       Liftride liftride = RPCHelper.parseLiftride(input);
-      connection.saveLiftride(liftride);
-      connection.close();
+      dataSource.saveLiftride(liftride);
       response.setStatus(HttpServletResponse.SC_OK);
     }
   }
@@ -63,7 +71,7 @@ public class SkierServlet extends HttpServlet {
       response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
       response.getWriter().write(gson.toJson(new Message("string")));
     } else {
-      MySQLConnection connection = new MySQLConnection();
+      DBCPDataSource connection = new DBCPDataSource();
       int totalVertNum = 0;
       String resortID = null;
       if (urlParts.length == 6) {
